@@ -29,6 +29,11 @@ public class Anagram {
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
 		
+		// Accounts for an empty String (technically an anagram)
+		if (str1.length() == 0 && str2.length() == 0) {
+    		return true;
+		}
+		
 		boolean same = false;
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
