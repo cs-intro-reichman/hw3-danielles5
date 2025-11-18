@@ -81,13 +81,10 @@ public class Algebra {
 	public static int pow(int x, int n) {
 		int power = 1;
 
-		if (n == 0) {
-			power = x;
-		} else {
 			for (int i = 0; i < n; i++) {
 				power = times(power, x);
 			}
-		}
+	
 		return power;	
 	}
 
@@ -131,8 +128,8 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		int square = 1;
-		int root = 1;
+		int square = x * x;
+		int root = x;
 
 		for (int i = 0; i <= x; i++) {
 			square = times(i, i);
