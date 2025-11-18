@@ -30,7 +30,7 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {	
 
 			for (int i = 0; i < n; i++) {
-				loan = loan * (1 + (rate / 100)) - payment;
+				loan = (loan - payment) * (1 + (rate / 100));
 			}
 
 		return loan;
@@ -63,7 +63,7 @@ public class LoanCalc {
 
 		// Initial starting point
 		double upper = loan;
-		double lower = loan / n;
+		double lower = 0;
 		iterationCounter = 0;
 
 		// Keeps iterating as long as the range we're searching through is larger than epsilon
