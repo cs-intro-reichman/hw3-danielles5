@@ -9,7 +9,7 @@ public class Algebra {
 	    System.out.println(plus(2,3));   		// 2 + 3
 	    System.out.println(minus(7,2));  		// 7 - 2
    		System.out.println(minus(2,7));  		// 2 - 7
- 		System.out.println(times(-3,4));  		// 3 * 4
+ 		System.out.println(times(3,4));  		// 3 * 4
    		System.out.println(plus(2,times(4,2))); // 2 + 4 * 2
    		System.out.println(pow(5,3));      // 5^3
    		System.out.println(pow(3,5));      // 3^5
@@ -81,8 +81,12 @@ public class Algebra {
 	public static int pow(int x, int n) {
 		int power = 1;
 
-		for (int i = 0; i <= n; i++) {
-			power = times(power, x);
+		if (n == 0) {
+			power = x;
+		} else {
+			for (int i = 0; i < n; i++) {
+				power = times(power, x);
+			}
 		}
 		return power;	
 	}
@@ -91,11 +95,28 @@ public class Algebra {
 	public static int div(int x1, int x2) {
 		int fullSub = 0;
 		int numerator = x1;
+		int denominator = x2;
 		
-		while (numerator >= x2) {
-			numerator = minus(numerator, x2);
-			fullSub++;
+		// Turns both numerator and denominator into positive numbers (if needed)
+		if (x1 < 0) {
+			numerator = minus(0, x1);
+		} 
+		if (x2 < 0) {
+			denominator = minus(0, x2);
 		}
+		
+		// Calculates how many times the denominator fits fully into the numerator
+		if (numerator >= denominator) {
+			while (numerator >= denominator) {
+				numerator = minus(numerator, denominator);
+				fullSub++;
+			}
+		}
+
+		// Turns the result into (-) depending on the original values
+		if ((x1 < 0 && x2 > 0) || (x1 > 0 && x2 < 0)) {
+			fullSub = minus(0, fullSub);
+		} 
 		return fullSub;
 	}
 
@@ -110,8 +131,8 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		int square = 0;
-		int root = 0;
+		int square = 1;
+		int root = 1;
 
 		for (int i = 0; i <= x; i++) {
 			square = times(i, i);
